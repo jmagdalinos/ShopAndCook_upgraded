@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">KotlinTest</string>
+    <string name="shopping_list_title">Shopping List</string>
+    <string name="meal_planner_title">Meal Planner</string>
+    <string name="recipes_title">Recipes</string>
+    <string name="meals_title">Meals</string>
+    <string name="recipe_ideas_title">Recipe Ideas</string>
+    <string name="sign_out_title">Sign out</string>
+</resources>

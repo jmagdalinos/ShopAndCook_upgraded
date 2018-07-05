@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_list">
+        <item>@string/shopping_list_title</item>
+        <item>@string/meal_planner_title</item>
+        <item>@string/recipes_title</item>
+        <item>@string/meals_title</item>
+        <item>@string/recipe_ideas_title</item>
+        <item>@string/sign_out_title</item>
+    </string-array>
+</resources>
