@@ -7,4 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity"
     android:id="@+id/fl_main">
+
+    <include
+        layout="@layout/toolbar"/>
 </FrameLayout>

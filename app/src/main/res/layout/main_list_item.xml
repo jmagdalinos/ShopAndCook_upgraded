@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     android:focusable="true"
-    android:background="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/iv_main_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_fragment_image_height"
+        android:contentDescription="@string/main_shopping_list"
+        android:scaleType="centerCrop"/>
 
     <TextView
-        android:id="@+id/tv_list_item_no"
+        android:id="@+id/tv_main_list_item"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        style="@style/main_fragment_text"/>
+</FrameLayout>

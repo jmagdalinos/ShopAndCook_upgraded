@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.johnmagdalinos.android.shopandcook2.R
+import com.johnmagdalinos.android.shopandcook2.data.ShoppingEntry
 import kotlinx.android.synthetic.main.shopping_list_item.view.*
 
 class ShoppingListAdapter(val context: Context): RecyclerView
 .Adapter<ShoppingListAdapter.ViewHolder>() {
-    var listItems: ArrayList<String>? = null
+    var listItems: ArrayList<ShoppingEntry>? = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var view: View = LayoutInflater.from(context).inflate(R.layout.shopping_list_item,
@@ -18,10 +19,18 @@ class ShoppingListAdapter(val context: Context): RecyclerView
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = listItems?.size ?: 0
+    override fun getItemCount(): Int {
+        return if (listItems?.size != 0 && listItems != null) listItems!!
+                .size else 0
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = listItems?.get(position)
+        if (listItems?.size == 0 ) return
+        holder.textView.text = listItems?.get(position)?.name
+    }
+
+    fun swapList(newList: ArrayList<ShoppingEntry>?) {
+        listItems = newList
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
