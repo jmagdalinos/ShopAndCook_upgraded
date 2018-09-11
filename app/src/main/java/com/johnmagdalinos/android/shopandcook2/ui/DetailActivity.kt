@@ -1,9 +1,6 @@
 package com.johnmagdalinos.android.shopandcook2.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.NavUtils
-import android.support.v4.app.TaskStackBuilder
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.johnmagdalinos.android.shopandcook2.R
@@ -48,7 +45,7 @@ class DetailActivity : AppCompatActivity() {
 
                 if(shoppingListFragment == null) shoppingListFragment = ShoppingListFragment.newInstance()
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.fl_detail, shoppingListFragment)
+                        .replace(R.id.cl_detail, shoppingListFragment)
                         .addToBackStack(null)
                         .commit()
             }
@@ -57,7 +54,7 @@ class DetailActivity : AppCompatActivity() {
 
                 if(recipeListFragment == null) recipeListFragment = RecipeListFragment.newInstance()
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.fl_detail, recipeListFragment)
+                        .replace(R.id.cl_detail, recipeListFragment)
                         .addToBackStack(null)
                         .commit()
             }
@@ -78,51 +75,56 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         // Respond to the action bar's Up/Home button
-        val upIntent: Intent? = NavUtils.getParentActivityIntent(this)
-
-        when {
-            upIntent == null -> throw IllegalStateException("No Parent Activity Intent")
-            NavUtils.shouldUpRecreateTask(this, upIntent) -> {
-                // This activity is NOT part of this app's task, so create a new task
-                // when navigating up, with a synthesized back stack.
-                TaskStackBuilder.create(this)
-                        // Add all of this activity's parents to the back stack
-                        .addNextIntentWithParentStack(upIntent)
-                        // Navigate up to the closest parent
-                        .startActivities()
-            }
-            else -> {
-                // This activity is part of this app's task, so simply
-                // navigate up to the logical parent activity.
-                NavUtils.navigateUpTo(this, upIntent)
-            }
-        }
+        supportFinishAfterTransition()
+//        val upIntent: Intent? = NavUtils.getParentActivityIntent(this)
+//
+//        when {
+//            upIntent == null -> throw IllegalStateException("No Parent Activity Intent")
+//
+//            NavUtils.shouldUpRecreateTask(this, upIntent) -> {
+//                // This activity is NOT part of this app's task, so create a new task
+//                // when navigating up, with a synthesized back stack.
+//                TaskStackBuilder.create(this)
+//                        // Add all of this activity's parents to the back stack
+//                        .addNextIntentWithParentStack(upIntent)
+//                        // Navigate up to the closest parent
+//                        .startActivities()
+//            }
+//            else -> {
+//                // This activity is part of this app's task, so simply
+//                // navigate up to the logical parent activity.
+//                NavUtils.navigateUpTo(this, upIntent)
+//            }
+//        }
         super.onBackPressed()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             android.R.id.home -> {
-                // Respond to the action bar's Up/Home button
-                val upIntent: Intent? = NavUtils.getParentActivityIntent(this)
 
-                when {
-                    upIntent == null -> throw IllegalStateException("No Parent Activity Intent")
-                    NavUtils.shouldUpRecreateTask(this, upIntent) -> {
-                        // This activity is NOT part of this app's task, so create a new task
-                        // when navigating up, with a synthesized back stack.
-                        TaskStackBuilder.create(this)
-                                // Add all of this activity's parents to the back stack
-                                .addNextIntentWithParentStack(upIntent)
-                                // Navigate up to the closest parent
-                                .startActivities()
-                    }
-                    else -> {
-                        // This activity is part of this app's task, so simply
-                        // navigate up to the logical parent activity.
-                        NavUtils.navigateUpTo(this, upIntent)
-                    }
-                }
+                supportFinishAfterTransition()
+//                // Respond to the action bar's Up/Home button
+//                val upIntent: Intent? = NavUtils.getParentActivityIntent(this)
+//
+//                when {
+//                    upIntent == null -> throw IllegalStateException("No Parent Activity Intent")
+//                    NavUtils.shouldUpRecreateTask(this, upIntent) -> {
+//                        // This activity is NOT part of this app's task, so create a new task
+//                        // when navigating up, with a synthesized back stack.
+//                        TaskStackBuilder.create(this)
+//                                // Add all of this activity's parents to the back stack
+//                                .addNextIntentWithParentStack(upIntent)
+//                                // Navigate up to the closest parent
+//                                .startActivities()
+//                    }
+//
+//                    else -> {
+//                        // This activity is part of this app's task, so simply
+//                        // navigate up to the logical parent activity.
+//                        NavUtils.navigateUpTo(this, upIntent)
+//                    }
+//                }
                 true
             } else -> {
                 super.onOptionsItemSelected(item)

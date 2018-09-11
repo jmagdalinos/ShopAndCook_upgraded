@@ -2,7 +2,9 @@ package com.johnmagdalinos.android.shopandcook2.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.johnmagdalinos.android.shopandcook2.R
 import com.johnmagdalinos.android.shopandcook2.ui.fragments.MainFragment
 import com.johnmagdalinos.android.shopandcook2.utils.Constants
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentCallback {
         }
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_main, mainFragment)
+                .replace(R.id.cl_main, mainFragment)
                 .commit()
     }
 
@@ -33,8 +35,8 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentCallback {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onMainFragmentCallback(title: String) {
-        var intent: Intent = Intent(this, DetailActivity::class.java)
+    override fun onMainFragmentCallback(title: String, sharedView: View) {
+        val intent: Intent = Intent(this, DetailActivity::class.java)
 
         intent.putExtra(Constants.DETAIL_ACTIVITY_KEY, when(title) {
             getString(R.string.main_shopping_list) -> Constants.SHOPPING_LIST_KEY
@@ -45,7 +47,14 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentCallback {
             getString(R.string.main_sign_out) -> Constants.SIGN_OUT_KEY
             else -> throw IllegalArgumentException("Wrong intent extra")
         })
-        startActivity(intent)
+
+        // Bundle for shared element transitions
+        val bundle: Bundle? = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(
+                        this,
+                        sharedView,
+                        sharedView.transitionName).toBundle()
+        startActivity(intent, bundle)
     }
 }
 

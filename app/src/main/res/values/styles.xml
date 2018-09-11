@@ -6,6 +6,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/transition_shared_element</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/transition_shared_element</item>
+        <item name="android:windowSharedElementExitTransition">@transition/transition_shared_element</item>
     </style>
 
     <!-- Text style for the text in the Main Fragment CardsViews -->
@@ -197,4 +200,8 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

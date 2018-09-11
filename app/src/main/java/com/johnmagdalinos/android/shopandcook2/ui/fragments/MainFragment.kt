@@ -17,7 +17,7 @@ class MainFragment : Fragment() {
     private lateinit var callBack: MainFragmentCallback
 
     interface MainFragmentCallback {
-        fun onMainFragmentCallback(title: String)
+        fun onMainFragmentCallback(title: String, sharedView: View)
     }
 
     companion object {
@@ -38,11 +38,12 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
+        // Setup the RecyclerView
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_main_list).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this.context)
-            adapter = MainAdapter(this.context) {title: String -> callBack
-                    .onMainFragmentCallback(title)}
+            adapter = MainAdapter(this.context) {title: String, sharedView: View -> callBack
+                    .onMainFragmentCallback(title, sharedView)}
 
             if (savedInstanceState != null) {
                 layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable(Constants.MAIN_FRAGMENT_RECYCLER_STATE))
@@ -51,6 +52,7 @@ class MainFragment : Fragment() {
         return view
     }
 
+    /** Save the current state of the RecyclerView */
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(Constants.MAIN_FRAGMENT_RECYCLER_STATE, recyclerView.layoutManager.onSaveInstanceState())
         super.onSaveInstanceState(outState)

@@ -8,8 +8,12 @@
     <dimen name="tutorial_title_text_size">40sp</dimen>
     <dimen name="tutorial_text_size">14sp</dimen>
 
+    <!-- FABs -->
+    <dimen name="fab_margin">16dp</dimen>
+
     <!-- Toolbar dimensions -->
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="tall_toolbar_height">168dp</dimen>
 
     <!-- Border dimensions -->
     <dimen name="border_height">60dp</dimen>

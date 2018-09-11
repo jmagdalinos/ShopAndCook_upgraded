@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import com.johnmagdalinos.android.shopandcook2.R
 import kotlinx.android.synthetic.main.main_list_item.view.*
 
-class MainAdapter(private val context: Context, val listener: (String) -> Unit): RecyclerView
+class MainAdapter(private val context: Context, val listener: (String, View) -> Unit): RecyclerView
 .Adapter<MainAdapter.ViewHolder>() {
+
     private val listItems: Array<String> = context.resources.getStringArray(R.array.main_list)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var view: View = LayoutInflater.from(context).inflate(R.layout.main_list_item, parent, false)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.main_list_item, parent,
+                false)
         return ViewHolder(view)
     }
 
@@ -37,10 +39,10 @@ class MainAdapter(private val context: Context, val listener: (String) -> Unit):
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(title: String, image: Drawable, listener: (String) -> Unit) = with(title) {
+        fun bind(title: String, image: Drawable, listener: (String, View) -> Unit) = with(title) {
             itemView.tv_main_list_item.text = title
             itemView.iv_main_list_item.setImageDrawable(image)
-            itemView.setOnClickListener { listener(title) }
+            itemView.setOnClickListener { listener(title, itemView.iv_main_list_item) }
         }
     }
 

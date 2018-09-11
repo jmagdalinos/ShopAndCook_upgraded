@@ -13,12 +13,10 @@ abstract class ShoppingDatabase : RoomDatabase() {
 
     companion object {
         private const val DATABASE_NAME: String = "shopping"
-        lateinit var database: ShoppingDatabase
-    }
 
-    fun createDatabase(context: Context) : ShoppingDatabase {
-        database = Room.databaseBuilder(context.applicationContext, ShoppingDatabase::class
+        fun newInstance(context: Context) : ShoppingDatabase {
+            return Room.databaseBuilder(context.applicationContext, ShoppingDatabase::class
                     .java, DATABASE_NAME).build()
-        return database
+        }
     }
 }
