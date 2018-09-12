@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_insert_all"
+        android:title="Insert All"
+        android:icon="@drawable/ic_add_all_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/menu_shopping_delete_all"
         android:title="@string/action_clear"
         android:icon="@drawable/ic_delete_white_24dp"

@@ -19,11 +19,11 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun insertShoppingEntry(entry: ShoppingEntry){
-        repository.insertRandomEntry()
+        repository.insertRandomTestEntry()
     }
 
     fun updateShoppingEntry(entry: ShoppingEntry) {
-        // TODO: Update entry
+        repository.updateShoppingEntry(entry)
     }
 
     fun deleteAllShopping() {
@@ -35,6 +35,10 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun addTestEntries() {
-        repository.insertRandomEntry()
+        repository.insertRandomTestEntry()
+    }
+
+    fun addAllTestEntries() {
+        repository.insertAllTestEntries()
     }
 }

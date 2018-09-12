@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.johnmagdalinos.android.shopandcook2.R
 import kotlinx.android.synthetic.main.main_list_item.view.*
 
-class MainAdapter(private val context: Context, val listener: (String, View) -> Unit): RecyclerView
+class MainAdapter(private val context: Context, private val listener: (String, View) -> Unit): RecyclerView
 .Adapter<MainAdapter.ViewHolder>() {
 
     private val listItems: Array<String> = context.resources.getStringArray(R.array.main_list)

@@ -1,15 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_shopping_foreground"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="wrap_content"
+    android:background="@color/unCheckedBackground"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center">
+
+    <CheckBox
+        android:id="@+id/chk_shopping_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/ingredient_list_item_text_margin"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_shopping_list_item_name"
+        app:layout_constraintEnd_toStartOf="@+id/tv_shopping_list_item_name"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_shopping_list_item"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:id="@+id/tv_shopping_list_item_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/ingredient_list_item_text_margin"
+        android:textSize="@dimen/ingredient_list_item_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/chk_shopping_list"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:hint="@string/ingredient_list_item_hint_name"/>
+
+    <TextView
+        android:id="@+id/tv_shopping_list_item_quantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/ingredient_list_item_text_margin"
+        android:layout_marginStart="@dimen/ingredient_list_item_text_margin"
         android:gravity="center"
-        android:padding="8dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:textSize="@dimen/ingredient_list_item_text_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_shopping_list_item_name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        tools:hint="@string/ingredient_list_item_hint_quantity"/>
+
+    <TextView
+        android:id="@+id/tv_shopping_list_item_measure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/ingredient_list_item_text_margin"
+        android:layout_marginStart="@dimen/ingredient_list_item_text_margin"
+        android:hint="@string/ingredient_list_item_hint_measure"
+        android:textSize="@dimen/ingredient_list_item_text_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_shopping_list_item_name"
+        app:layout_constraintEnd_toStartOf="@+id/iv_shopping_list_color"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"/>
+
+    <ImageView
+        android:id="@+id/iv_shopping_list_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_circle"
+        android:contentDescription="@string/content_description_recipe_color"
+        android:layout_marginStart="@dimen/ingredient_list_item_text_margin"
+        android:layout_marginEnd="@dimen/ingredient_list_item_text_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7"/>
+
+    <ImageView
+        android:id="@+id/iv_shopping_list_pencil_line"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/ingredient_list_item_pencil_line_stroke"
+        android:scaleType="centerCrop"
+        android:paddingEnd="@dimen/ingredient_list_item_text_margin"
+        app:layout_constraintStart_toStartOf="@id/tv_shopping_list_item_name"
+        app:layout_constraintEnd_toEndOf="@id/tv_shopping_list_item_measure"
+        app:layout_constraintTop_toTopOf="@id/chk_shopping_list"
+        app:layout_constraintBottom_toBottomOf="@id/chk_shopping_list"
+        android:src="@drawable/ic_pencil_line"
+        android:alpha="0.0"/>
+
+    <ImageView
+        android:id="@+id/iv_shopping_list_pencil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_shopping_list_item_name"
+        android:src="@drawable/ic_pencil"
+        android:alpha="0.0"/>
+
 </android.support.constraint.ConstraintLayout>

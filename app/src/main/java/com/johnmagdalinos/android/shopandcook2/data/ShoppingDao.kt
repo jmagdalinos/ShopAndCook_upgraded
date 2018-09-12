@@ -6,7 +6,7 @@ import android.arch.persistence.room.*
 @Dao
 interface ShoppingDao {
     // Returns a list of all shopping entries
-    @Query("SELECT * FROM shopping ORDER BY name ASC")
+    @Query("SELECT * FROM shopping ORDER BY checked ASC, name ASC")
     fun getAllShoppingASCName(): LiveData<List<ShoppingEntry>>
 
     @Query("SELECT * FROM shopping ORDER BY color ASC")
@@ -18,7 +18,7 @@ interface ShoppingDao {
 
     // Inserts multiple entries
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertShoppingEntries(vararg entries: ShoppingEntry)
+    fun insertMultipleShoppingEntries(vararg entries: ShoppingEntry)
 
     // Updates a shopping entry
     @Update(onConflict = OnConflictStrategy.REPLACE)

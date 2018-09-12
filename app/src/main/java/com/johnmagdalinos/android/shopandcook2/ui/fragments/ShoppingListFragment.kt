@@ -62,12 +62,14 @@ class ShoppingListFragment : Fragment() {
     }
 
     /** Setup the RecyclerView, Adapter and SwipeCallback */
-    fun setupRecyclerView(view: View, savedInstanceState: Bundle?) {
+    private fun setupRecyclerView(view: View, savedInstanceState: Bundle?) {
         // Create the AdapterDataObserver to scroll the RecyclerView to the new item
         dataObserver = AdapterObserver()
 
         // Setup the RecyclerView
-        recyclerAdapter = ShoppingListAdapter(context!!)
+        recyclerAdapter = ShoppingListAdapter(context!!) { position: Int, isChecked: Boolean ->
+            updateEntry(position, isChecked)}
+
         recyclerAdapter.registerAdapterDataObserver(dataObserver)
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_shopping_list).apply {
             setHasFixedSize(true)
@@ -97,6 +99,14 @@ class ShoppingListFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
+    private fun updateEntry(position: Int, isChecked: Boolean) {
+        val itemChanged = recyclerAdapter.getItemAtPosition(position)
+        if (itemChanged != null) {
+            itemChanged.checked = if (isChecked) 1 else 0
+            viewModel.updateShoppingEntry(itemChanged)
+        }
+    }
+
     /** Unregisters the AdapterDataObserver */
     override fun onPause() {
         recyclerAdapter.unregisterAdapterDataObserver(dataObserver)
@@ -111,6 +121,10 @@ class ShoppingListFragment : Fragment() {
         return when(item?.itemId) {
             R.id.menu_shopping_delete_all -> {
                 viewModel.deleteAllShopping()
+                true
+            }
+            R.id.menu_insert_all -> {
+                viewModel.addAllTestEntries()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -128,6 +142,13 @@ class ShoppingListFragment : Fragment() {
                 recyclerView.scrollToPosition(positionStart)
             }
             super.onItemRangeInserted(positionStart, itemCount)
+        }
+
+        override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+            if (recyclerAdapter.list != null && itemCount == 1) {
+                recyclerView.scrollToPosition(fromPosition)
+            }
+            super.onItemRangeMoved(fromPosition, toPosition, itemCount)
         }
     }
 }
