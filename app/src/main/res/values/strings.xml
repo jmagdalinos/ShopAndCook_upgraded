@@ -27,7 +27,7 @@
     <string name="main_sign_out">Sign out</string>
 
     <!--Ingredient List Header -->
-    <string name="ingredient_list_header_name">Name</string>
+    <string name="ingredient_list_header_name">Item</string>
     <string name="ingredient_list_header_quantity">Quantity</string>
     <string name="ingredient_list_header_measure">Measure</string>
     <string name="ingredient_list_header_notes">Notes</string>

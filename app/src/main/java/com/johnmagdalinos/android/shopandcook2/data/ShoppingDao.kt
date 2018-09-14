@@ -9,8 +9,14 @@ interface ShoppingDao {
     @Query("SELECT * FROM shopping ORDER BY checked ASC, name ASC")
     fun getAllShoppingASCName(): LiveData<List<ShoppingEntry>>
 
-    @Query("SELECT * FROM shopping ORDER BY color ASC")
+    @Query("SELECT * FROM shopping ORDER BY checked ASC, name DESC")
+    fun getAllShoppingDESCName(): LiveData<List<ShoppingEntry>>
+
+    @Query("SELECT * FROM shopping ORDER BY checked ASC, color ASC, name ASC")
     fun getAllShoppingASCColor(): LiveData<List<ShoppingEntry>>
+
+    @Query("SELECT * FROM shopping ORDER BY checked ASC, color DESC, name ASC")
+    fun getAllShoppingDESCColor(): LiveData<List<ShoppingEntry>>
 
     // Inserts a shopping entry
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -31,8 +31,8 @@
     <View
         android:id="@+id/v_shopping_list_divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="@dimen/shopping_list_divider_height"
+        android:background="@color/colorPrimary"
         android:layout_marginBottom="@dimen/shopping_list_divider_padding"
         app:layout_constraintTop_toBottomOf="@id/tv_shopping_list_name"/>
 

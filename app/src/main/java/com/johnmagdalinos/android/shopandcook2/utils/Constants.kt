@@ -18,5 +18,11 @@ class Constants {
         const val MAIN_FRAGMENT_RECYCLER_STATE = "main_recycler_state"
         const val SHOPPING_LIST_FRAGMENT_RECYCLER_STATE = "shopping_list_recycler_state"
         const val RECIPE_LIST_FRAGMENT_RECYCLER_STATE = "recipe_list_recycler_state"
+
+        // Shared Preferences
+        const val PREFS_SHOPPING_LIST_ORDER: String = "shopping_list_order"
+        const val PREFS_SHOPPING_LIST_METHOD: String = "shopping_list_method"
+        const val PREFS_METHOD_BY_NAME: String = "name"
+        const val PREFS_METHOD_BY_COLOR: String = "color"
     }
 }

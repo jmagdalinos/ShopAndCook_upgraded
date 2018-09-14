@@ -2,6 +2,7 @@ package com.johnmagdalinos.android.shopandcook2.data
 
 import android.arch.lifecycle.LiveData
 import com.johnmagdalinos.android.shopandcook2.AppExecutors
+import com.johnmagdalinos.android.shopandcook2.utils.Constants
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -21,9 +22,30 @@ class Repository {
         }
     }
 
-    fun getShoppingList(): LiveData<List<ShoppingEntry>> {
-        return shoppingDao.getAllShoppingASCName()
+    /** Retrieves the shopping list */
+    fun getShoppingList(orderPair: Pair<String, Boolean>): LiveData<List<ShoppingEntry>> {
+        return if (orderPair.first == Constants.PREFS_METHOD_BY_COLOR) {
+            // Retrieve list sorted by color
+            if (orderPair.second) {
+                // Ascending
+                shoppingDao.getAllShoppingASCColor()
+            } else {
+                // Descending
+                shoppingDao.getAllShoppingDESCColor()
+            }
+        } else {
+            // Retrieve list sorted by name
+            if (orderPair.second) {
+                // Ascending
+                shoppingDao.getAllShoppingASCName()
+            } else {
+                // Descending
+                shoppingDao.getAllShoppingDESCName()
+            }
+        }
+
     }
+
 
     fun insertShoppingEntry(entry: ShoppingEntry) {
         appExecutors.diskIO().execute { shoppingDao.insertShoppingEntry(entry) }

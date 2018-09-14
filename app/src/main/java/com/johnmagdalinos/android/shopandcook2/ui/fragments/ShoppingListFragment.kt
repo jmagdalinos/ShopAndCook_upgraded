@@ -2,6 +2,7 @@ package com.johnmagdalinos.android.shopandcook2.ui.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -19,6 +20,8 @@ import com.johnmagdalinos.android.shopandcook2.utils.InjectorUtils
 import com.johnmagdalinos.android.shopandcook2.viewmodels.DetailViewModel
 import com.johnmagdalinos.android.shopandcook2.viewmodels.DetailViewModelFactory
 import kotlinx.android.synthetic.main.activity_detail.*
+
+
 
 class ShoppingListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -47,13 +50,12 @@ class ShoppingListFragment : Fragment() {
         val factory: DetailViewModelFactory = InjectorUtils().provideDetailViewModelFactory(context!!)
 
         viewModel = ViewModelProviders.of(this, factory).get(DetailViewModel::class.java)
-        viewModel.init()
-
-        viewModel.getShoppingList()?.observe(this, Observer<List<ShoppingEntry>> {shoppingList ->
-            recyclerAdapter.submitList(shoppingList)
-        })
 
         setupRecyclerView(view, savedInstanceState)
+
+        // Get last sorting method and order from the preferences
+        // Initiate the Observer
+        initiateObserver(retrievePreferences())
 
         // Setup the FAB
         activity?.fab_shopping?.setOnClickListener {
@@ -61,16 +63,29 @@ class ShoppingListFragment : Fragment() {
         return view
     }
 
+    /** Initiates the LiveData Observer */
+    private fun initiateObserver(sortPair: Pair<String, Boolean>) {
+        viewModel.init(sortPair)
+
+        viewModel.getShoppingList()?.observe(this, Observer<List<ShoppingEntry>> {
+            shoppingList -> recyclerAdapter.submitList(shoppingList)
+        })
+
+        // Save the sorting method and order from the preferences
+        val prefs = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(prefs.edit()) {
+            putString(Constants.PREFS_SHOPPING_LIST_METHOD, sortPair.first)
+            putBoolean(Constants.PREFS_SHOPPING_LIST_ORDER, sortPair.second)
+            apply()
+        }
+    }
+
     /** Setup the RecyclerView, Adapter and SwipeCallback */
     private fun setupRecyclerView(view: View, savedInstanceState: Bundle?) {
-        // Create the AdapterDataObserver to scroll the RecyclerView to the new item
-        dataObserver = AdapterObserver()
-
         // Setup the RecyclerView
         recyclerAdapter = ShoppingListAdapter(context!!) { position: Int, isChecked: Boolean ->
             updateEntry(position, isChecked)}
 
-        recyclerAdapter.registerAdapterDataObserver(dataObserver)
         recyclerView = view.findViewById<RecyclerView>(R.id.rv_shopping_list).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
@@ -99,12 +114,31 @@ class ShoppingListFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
+    /** An item was pressed. Update the db */
     private fun updateEntry(position: Int, isChecked: Boolean) {
         val itemChanged = recyclerAdapter.getItemAtPosition(position)
         if (itemChanged != null) {
             itemChanged.checked = if (isChecked) 1 else 0
             viewModel.updateShoppingEntry(itemChanged)
         }
+    }
+
+    /** Retrieves the last used sort method and order */
+    private fun retrievePreferences(): Pair<String, Boolean> {
+        val prefs = activity?.getPreferences(Context.MODE_PRIVATE)
+        val sortMethod = prefs?.getString(Constants.PREFS_SHOPPING_LIST_METHOD, Constants
+                .PREFS_METHOD_BY_NAME) ?: Constants.PREFS_METHOD_BY_NAME
+        val sortOrder = prefs?.getBoolean(Constants.PREFS_SHOPPING_LIST_ORDER, true) ?: true
+
+        return Pair(sortMethod, sortOrder)
+    }
+
+    /** Create the AdapterDataObserver to scroll the RecyclerView to the new item */
+    override fun onStart() {
+        dataObserver = AdapterObserver()
+        recyclerAdapter.registerAdapterDataObserver(dataObserver)
+
+        super.onStart()
     }
 
     /** Unregisters the AdapterDataObserver */
@@ -123,6 +157,47 @@ class ShoppingListFragment : Fragment() {
                 viewModel.deleteAllShopping()
                 true
             }
+
+            R.id.menu_sort_name -> {
+                viewModel.getShoppingList()?.removeObservers(this)
+
+                // Retrieve the last sort method and order
+                val orderPair: Pair<String, Boolean> = retrievePreferences()
+                val newOrderPair: Pair<String, Boolean> = if (orderPair.first == Constants
+                                .PREFS_METHOD_BY_NAME) {
+                    // The method was name, reverse the order
+                    Pair(Constants.PREFS_METHOD_BY_NAME, !(orderPair.second))
+                } else {
+                    // The method was color; Set it to by_name and sort ascending
+                    Pair(Constants.PREFS_METHOD_BY_NAME, true)
+                }
+
+                // Initiate the Observer
+                initiateObserver(newOrderPair)
+
+                true
+            }
+
+            R.id.menu_sort_color -> {
+                viewModel.getShoppingList()?.removeObservers(this)
+
+                // Retrieve the last sort method and order
+                val orderPair: Pair<String, Boolean> = retrievePreferences()
+                val newOrderPair: Pair<String, Boolean> = if (orderPair.first == Constants
+                                .PREFS_METHOD_BY_COLOR) {
+                    // The method was color, reverse the order
+                    Pair(Constants.PREFS_METHOD_BY_COLOR, !(orderPair.second))
+                } else {
+                    // The method was name; Set it to by_name and sort ascending
+                    Pair(Constants.PREFS_METHOD_BY_COLOR, true)
+                }
+
+                // Initiate the Observer
+                initiateObserver(newOrderPair)
+
+                true
+            }
+
             R.id.menu_insert_all -> {
                 viewModel.addAllTestEntries()
                 true
@@ -145,9 +220,10 @@ class ShoppingListFragment : Fragment() {
         }
 
         override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
-            if (recyclerAdapter.list != null && itemCount == 1) {
-                recyclerView.scrollToPosition(fromPosition)
-            }
+            if (fromPosition ==0) recyclerView.scrollToPosition(0)
+//            if (recyclerAdapter.list != null && itemCount == 1) {
+//                recyclerView.scrollToPosition(fromPosition)
+//            }
             super.onItemRangeMoved(fromPosition, toPosition, itemCount)
         }
     }
