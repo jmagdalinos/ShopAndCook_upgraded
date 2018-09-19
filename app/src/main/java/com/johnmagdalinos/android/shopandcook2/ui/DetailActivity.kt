@@ -21,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (savedInstanceState != null) {
-            this.currentFragment = savedInstanceState.getString(Constants.DETAIL_ACTIVITY_CURRENT_FRAGMENT)
+            currentFragment = savedInstanceState.getString(Constants.DETAIL_ACTIVITY_CURRENT_FRAGMENT)
             when(currentFragment) {
                 Constants.SHOPPING_LIST_KEY -> {
                     shoppingListFragment = supportFragmentManager.getFragment(savedInstanceState,
@@ -42,8 +42,11 @@ class DetailActivity : AppCompatActivity() {
         when(intent?.getStringExtra(Constants.DETAIL_ACTIVITY_KEY)) {
             Constants.SHOPPING_LIST_KEY -> {
                 currentFragment = Constants.SHOPPING_LIST_KEY
+                if(shoppingListFragment == null) {
+                    shoppingListFragment = ShoppingListFragment
+                            .newInstance()
 
-                if(shoppingListFragment == null) shoppingListFragment = ShoppingListFragment.newInstance()
+                }
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.cl_detail, shoppingListFragment)
                         .addToBackStack(null)
@@ -61,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    /** Save the current fragment key as well as the fragment itself */
+    /** Save the originalPosition fragment key as well as the fragment itself */
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.putString(Constants.DETAIL_ACTIVITY_CURRENT_FRAGMENT, currentFragment)
         when(currentFragment) {

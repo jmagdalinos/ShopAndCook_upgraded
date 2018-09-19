@@ -51,8 +51,9 @@
     <dimen name="shopping_list_divider_height">2dp</dimen>
 
     <!-- Ingredient Edit Dialog -->
-    <dimen name="ingredient_edit_color_picker_size">36dp</dimen>
-    <dimen name="ingredient_edit_color_picker_background_size">56dp</dimen>
+    <dimen name="ingredient_edit_color_picker_size">112dp</dimen>
+    <dimen name="ingredient_edit_color_picker_circle_size">48dp</dimen>
+    <dimen name="ingredient_edit_color_picker_margin">4dp</dimen>
 
     <!-- List Item -->
     <dimen name="list_item_title">24sp</dimen>
@@ -85,6 +86,9 @@
     <dimen name="dialog_text_margin_outer">64dp</dimen>
     <dimen name="dialog_select_color_text_size">20sp</dimen>
     <dimen name="dialog_select_color_margin">32dp</dimen>
+    <dimen name="dialog_delete_margin_S">8dp</dimen>
+    <dimen name="dialog_delete_margin_M">16dp</dimen>
+    <dimen name="dialog_delete_margin_L">24dp</dimen>
 
     <!-- Day -->
     <dimen name="day_title_margin_inner">16dp</dimen>

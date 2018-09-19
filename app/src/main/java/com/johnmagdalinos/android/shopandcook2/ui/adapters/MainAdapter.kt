@@ -17,7 +17,7 @@ class MainAdapter(private val context: Context, private val listener: (String, V
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(context).inflate(R.layout.main_list_item, parent,
                 false)
-        return ViewHolder(view)
+        return ViewHolder(view, context)
     }
 
     override fun getItemCount(): Int = 6
@@ -38,7 +38,7 @@ class MainAdapter(private val context: Context, private val listener: (String, V
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
         fun bind(title: String, image: Drawable, listener: (String, View) -> Unit) = with(title) {
             itemView.tv_main_list_item.text = title
             itemView.iv_main_list_item.setImageDrawable(image)

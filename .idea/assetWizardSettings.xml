@@ -30,8 +30,11 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_pencil" />
-                            <entry key="sourceFile" value="D:\Documents\AndroidStudioProjects\Files\Shop &amp; Cook\pencil.svg" />
+                            <entry key="height" value="48" />
+                            <entry key="outputName" value="ic_dialog_buttons_ic_positive_pressed" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="D:\Documents\AndroidStudioProjects\Files\Shop &amp; Cook\dialog_buttons_ic_positive_pressed.svg" />
+                            <entry key="width" value="48" />
                           </map>
                         </option>
                       </PersistentState>

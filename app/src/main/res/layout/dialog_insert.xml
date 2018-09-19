@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_insert_shopping_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/list_item_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Please insert an item name"
+            android:inputType="textCapSentences"/>
+
+        <TextView
+            android:id="@+id/tv_insert_shopping_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ingredient_list_header_quantity"
+            style="@style/list_item_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_insert_shopping_name"/>
+
+        <EditText
+            android:id="@+id/et_insert_shopping_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_insert_shopping_quantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            android:inputType="numberDecimal"/>
+
+        <Spinner
+            android:id="@+id/sp_insert_shopping_measure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@id/et_insert_shopping_quantity"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_insert_shopping_color"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/et_insert_shopping_quantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_insert_shopping_notes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ingredient_list_header_notes"
+            style="@style/list_item_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_insert_shopping_color"/>
+
+        <EditText
+            android:id="@+id/et_insert_shopping_notes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxHeight="150dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tv_insert_shopping_notes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:inputType="textMultiLine|textCapSentences"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imb_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dialog_positive_button_state_selector"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="@dimen/dialog_delete_margin_L"
+            android:layout_marginBottom="@dimen/dialog_delete_margin_M"
+            app:layout_constraintTop_toBottomOf="@id/et_insert_shopping_notes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imb_neg"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/imb_neg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dialog_negative_button_state_selector"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="@dimen/dialog_delete_margin_L"
+            android:layout_marginBottom="@dimen/dialog_delete_margin_M"
+            app:layout_constraintTop_toBottomOf="@id/et_insert_shopping_notes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imb_pos"/>
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

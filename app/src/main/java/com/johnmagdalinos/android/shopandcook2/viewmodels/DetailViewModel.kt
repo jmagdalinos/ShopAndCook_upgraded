@@ -6,24 +6,24 @@ import com.johnmagdalinos.android.shopandcook2.data.Repository
 import com.johnmagdalinos.android.shopandcook2.data.ShoppingEntry
 
 class DetailViewModel(private val repository: Repository) : ViewModel() {
-
-    private var shoppingList: LiveData<List<ShoppingEntry>>? = null
+    private var shoppingList: LiveData<List<ShoppingEntry>> = repository.getShoppingList(Pair("name",
+            true))
 
     /** Initiate the list shopping list */
     fun init(sortPair: Pair<String, Boolean>) {
-//        shoppingList = when (sortPair.first) {
-//            Constants.PREFS_METHOD_BY_NAME -> repository.getShoppingList(sortPair.second)
-//            else -> repository.getShoppingListColor(sortPair.second)
-//        }
+        shoppingList = repository.getShoppingList(sortPair)
+    }
+
+    fun reset(sortPair: Pair<String, Boolean>) {
         shoppingList = repository.getShoppingList(sortPair)
     }
 
     fun getShoppingList(): LiveData<List<ShoppingEntry>>? {
-      return shoppingList
+        return shoppingList
     }
 
     fun insertShoppingEntry(entry: ShoppingEntry){
-        repository.insertRandomTestEntry()
+        repository.insertShoppingEntry(entry)
     }
 
     fun updateShoppingEntry(entry: ShoppingEntry) {
@@ -38,8 +38,9 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
         repository.deleteShoppingEntry(entry)
     }
 
-    fun addTestEntries() {
+    fun addTestEntry() {
         repository.insertRandomTestEntry()
+
     }
 
     fun addAllTestEntries() {

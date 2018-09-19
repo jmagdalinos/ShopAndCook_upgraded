@@ -20,8 +20,8 @@ import com.johnmagdalinos.android.shopandcook2.utils.Conversions.Companion.conve
 import com.johnmagdalinos.android.shopandcook2.utils.Conversions.Companion.convertQuantityToString
 import kotlinx.android.synthetic.main.shopping_list_item.view.*
 
-class ShoppingListAdapter(val context: Context, val listener: (Int, Boolean) -> Unit):
-ListAdapter<ShoppingEntry, ShoppingListAdapter.ViewHolder>(DIFF_CALLBACK) {
+class ShoppingListAdapter(val context: Context, private val listener: (Int, Boolean, Boolean) ->
+Unit): ListAdapter<ShoppingEntry, ShoppingListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     var list: List<ShoppingEntry>? = null
 
@@ -31,9 +31,7 @@ ListAdapter<ShoppingEntry, ShoppingListAdapter.ViewHolder>(DIFF_CALLBACK) {
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindTo(context, getItem(position), listener)
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindTo(context, getItem(position), listener)
 
     /** Used to submit a new list. Starts DiffUtil */
     override fun submitList(list: List<ShoppingEntry>?) {
@@ -42,16 +40,22 @@ ListAdapter<ShoppingEntry, ShoppingListAdapter.ViewHolder>(DIFF_CALLBACK) {
     }
 
     /** Used to retrieve the item at a specific position */
-    fun getItemAtPosition(position: Int) : ShoppingEntry? {
-        return if (list!= null) list!![position] else null
-    }
+    fun getItemAtPosition(position: Int) : ShoppingEntry? = if (list!= null) list!![position] else null
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindTo(context: Context, entry: ShoppingEntry?, listener: (Int, Boolean) -> Unit) {
+        fun bindTo(context: Context, entry: ShoppingEntry?, listener: (Int, Boolean, Boolean) ->
+        Unit) {
             itemView.chk_shopping_list.isChecked = convertIntToBoolean(entry?.checked)
             itemView.tv_shopping_list_item_name.text = entry?.name
-            itemView.tv_shopping_list_item_quantity.text = convertQuantityToString(entry?.quantity)
-            itemView.tv_shopping_list_item_measure.text = convertIntToMeasure(context, entry?.measure, entry?.quantity)
+
+            // Hide the quantity and measure if the quantity is empty
+            if (entry?.quantity == null || entry.quantity == 0.0f) {
+                itemView.tv_shopping_list_item_quantity.visibility = View.INVISIBLE
+                itemView.tv_shopping_list_item_measure.visibility = View.INVISIBLE
+            } else {
+                itemView.tv_shopping_list_item_quantity.text = convertQuantityToString(entry.quantity)
+                itemView.tv_shopping_list_item_measure.text = convertIntToMeasure(context, entry.measure, entry.quantity)
+            }
 
             // Grey out the views if they're checked
             greyOutViews(itemView.chk_shopping_list.isChecked, false, context)
@@ -60,11 +64,16 @@ ListAdapter<ShoppingEntry, ShoppingListAdapter.ViewHolder>(DIFF_CALLBACK) {
             val circleColor: GradientDrawable = itemView.iv_shopping_list_color.background as GradientDrawable
             circleColor.setColor(convertIntToColor(context, entry?.color))
 
-            // Setup the onClickListeners
+            // Setup the onClickListener for the checkBox
             itemView.chk_shopping_list.setOnClickListener {
-                listener(adapterPosition, itemView.chk_shopping_list.isChecked)
+                listener(adapterPosition, itemView.chk_shopping_list.isChecked, false)
                 // Grey out the checked ViewHolder
                 greyOutViews(itemView.chk_shopping_list.isChecked, true, context)}
+
+            // Setup the onClickListener for the entire ViewHolder
+            itemView.setOnClickListener {
+                listener(adapterPosition, false, true)
+            }
         }
 
         /** Used to grey out the views of the ViewHolder if its checkbox is checked */

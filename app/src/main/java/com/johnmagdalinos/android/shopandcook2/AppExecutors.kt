@@ -12,9 +12,9 @@ class AppExecutors {
                     MainThreadExecutor())
         }
     }
-    private var diskIO: Executor? = null
-    private var networkIO: Executor? = null
-    private var mainThread: Executor? = null
+    private lateinit var diskIO: Executor
+    private lateinit var networkIO: Executor
+    private lateinit var mainThread: Executor
 
     private constructor(diskIO: Executor, networkIO: Executor, mainThread: Executor) {
         this.diskIO = diskIO
@@ -22,9 +22,9 @@ class AppExecutors {
         this.mainThread = mainThread
     }
 
-    fun diskIO(): Executor = this.diskIO!!
-    fun networkIO(): Executor = this.networkIO!!
-    fun mainThread(): Executor = this.mainThread!!
+    fun diskIO(): Executor = this.diskIO
+    fun networkIO(): Executor = this.networkIO
+    fun mainThread(): Executor = this.mainThread
 
     private class MainThreadExecutor: Executor {
 

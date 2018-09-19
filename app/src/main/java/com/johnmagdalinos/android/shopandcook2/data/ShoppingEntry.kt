@@ -7,10 +7,11 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "shopping",
         indices = [(Index("name")), (Index("color")), (Index("checked"))])
 data class ShoppingEntry (
-        @PrimaryKey(autoGenerate = true) var id: Long?,
+        @PrimaryKey(autoGenerate = true)
+        var id: Long?,
         var name: String,
-        var comments: String?,
+        var notes: String?,
         var measure: Int?,
-        var quantity: Double?,
+        var quantity: Float?,
         var color: Int,
         var checked: Int)

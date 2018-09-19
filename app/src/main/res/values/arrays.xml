@@ -9,6 +9,22 @@
         <item>@string/main_sign_out</item>
     </string-array>
 
+    <string-array name="measure_spinner">
+        <item>@plurals/measure_0</item>
+        <item>@plurals/measure_1</item>
+        <item>@plurals/measure_2</item>
+        <item>@plurals/measure_3</item>
+        <item>@plurals/measure_4</item>
+        <item>@plurals/measure_5</item>
+        <item>@plurals/measure_6</item>
+        <item>@plurals/measure_7</item>
+        <item>@plurals/measure_8</item>
+        <item>@plurals/measure_9</item>
+        <item>@plurals/measure_10</item>
+        <item>@plurals/measure_11</item>
+        <item>@plurals/measure_12</item>
+    </string-array>
+
     <string-array name="measure_spinner_singular">
         <item>@string/measure_0</item>
         <item>@string/measure_1</item>
@@ -25,19 +41,4 @@
         <item>@string/measure_12</item>
     </string-array>
 
-    <string-array name="measure_spinner_plural">
-        <item>@string/measure_0_plural</item>
-        <item>@string/measure_1_plural</item>
-        <item>@string/measure_2_plural</item>
-        <item>@string/measure_3_plural</item>
-        <item>@string/measure_4_plural</item>
-        <item>@string/measure_5_plural</item>
-        <item>@string/measure_6_plural</item>
-        <item>@string/measure_7_plural</item>
-        <item>@string/measure_8_plural</item>
-        <item>@string/measure_9_plural</item>
-        <item>@string/measure_10_plural</item>
-        <item>@string/measure_11_plural</item>
-        <item>@string/measure_12_plural</item>
-    </string-array>
 </resources>

@@ -109,7 +109,7 @@
 
     <!-- Toast messages -->
     <string name="sign_in">Sign in successful.\nWelcome to Shop &amp; Cook!</string>
-    <string name="add_ingredient_name">Please add an ingredient name</string>
+    <string name="add_entry_name">Please add a name</string>
     <string name="add_recipe_name">Please add a recipe name</string>
     <string name="add_meal_name">Please add a meal name</string>
 
@@ -142,6 +142,7 @@
     <string name="dialog_title_select_recipes">Select Recipe</string>
     <string name="dialog_title_select_meal">Select Meal</string>
     <string name="dialog_color_picker_title">Select color</string>
+    <string name="dialog_delete_are_you_sure">Are you sure?</string>
     <string name="dialog_clear_shopping_list_title">Clear shopping list</string>
     <string name="dialog_clear_recipes_title">Delete all recipes</string>
     <string name="dialog_clear_meals_title">Delete all meals</string>
@@ -166,6 +167,60 @@
     <string name="share_meal_with">with</string>
     <string name="share_meal_and">and</string>
     <string name="share_recipe_title">Recipe of the day:</string>
+
+    <!-- Quantities for measure spinner -->
+    <plurals name="measure_0">
+        <item quantity="one">@string/measure_0</item>
+        <item quantity="other">@string/measure_0_plural</item>
+    </plurals>
+    <plurals name="measure_1">
+        <item quantity="one">@string/measure_1</item>
+        <item quantity="other">@string/measure_1_plural</item>
+    </plurals>
+    <plurals name="measure_2">
+        <item quantity="one">@string/measure_2</item>
+        <item quantity="other">@string/measure_2_plural</item>
+    </plurals>
+    <plurals name="measure_3">
+        <item quantity="one">@string/measure_3</item>
+        <item quantity="other">@string/measure_3_plural</item>
+    </plurals>
+    <plurals name="measure_4">
+        <item quantity="one">@string/measure_4</item>
+        <item quantity="other">@string/measure_4_plural</item>
+    </plurals>
+    <plurals name="measure_5">
+        <item quantity="one">@string/measure_5</item>
+        <item quantity="other">@string/measure_5_plural</item>
+    </plurals>
+    <plurals name="measure_6">
+        <item quantity="one">@string/measure_6</item>
+        <item quantity="other">@string/measure_6_plural</item>
+    </plurals>
+    <plurals name="measure_7">
+        <item quantity="one">@string/measure_7</item>
+        <item quantity="other">@string/measure_7_plural</item>
+    </plurals>
+    <plurals name="measure_8">
+        <item quantity="one">@string/measure_8</item>
+        <item quantity="other">@string/measure_8_plural</item>
+    </plurals>
+    <plurals name="measure_9">
+        <item quantity="one">@string/measure_9</item>
+        <item quantity="other">@string/measure_9_plural</item>
+    </plurals>
+    <plurals name="measure_10">
+        <item quantity="one">@string/measure_10</item>
+        <item quantity="other">@string/measure_10_plural</item>
+    </plurals>
+    <plurals name="measure_11">
+        <item quantity="one">@string/measure_11</item>
+        <item quantity="other">@string/measure_11_plural</item>
+    </plurals>
+    <plurals name="measure_12">
+        <item quantity="one">@string/measure_12</item>
+        <item quantity="other">@string/measure_12_plural</item>
+    </plurals>
 
     <!-- Measure spinner items singulars -->
     <string name="measure_0">kg</string>

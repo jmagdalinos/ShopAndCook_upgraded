@@ -32,8 +32,7 @@
         android:id="@+id/v_shopping_list_divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/shopping_list_divider_height"
-        android:background="@color/colorPrimary"
-        android:layout_marginBottom="@dimen/shopping_list_divider_padding"
+        style="@style/recipe_divider"
         app:layout_constraintTop_toBottomOf="@id/tv_shopping_list_name"/>
 
     <android.support.constraint.Guideline
@@ -51,5 +50,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </android.support.v7.widget.RecyclerView>
-
 </android.support.constraint.ConstraintLayout>

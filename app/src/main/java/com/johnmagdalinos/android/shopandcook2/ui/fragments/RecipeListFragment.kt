@@ -42,7 +42,7 @@ class RecipeListFragment : Fragment() {
 
         return view
     }
-    /** Save the current state of the RecyclerView */
+    /** Save the originalPosition state of the RecyclerView */
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(Constants.RECIPE_LIST_FRAGMENT_RECYCLER_STATE, recyclerView
                 .layoutManager.onSaveInstanceState())

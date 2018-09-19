@@ -24,5 +24,20 @@ class Constants {
         const val PREFS_SHOPPING_LIST_METHOD: String = "shopping_list_method"
         const val PREFS_METHOD_BY_NAME: String = "name"
         const val PREFS_METHOD_BY_COLOR: String = "color"
+
+        // Keys for Fragment bundles
+        const val DELETE_DIALOG_ARGS: String = "delete_dialog_args"
+
+        // Request codes
+        const val INSERT_DIALOG_CODE: Int = 101
+        const val DELETE_DIALOG_CODE: Int = 102
+
+        // Keys for inserting a shopping entry
+        const val SHOPPING_ENTRY_POSITION = "position"
+        const val SHOPPING_ENTRY_NAME = "name"
+        const val SHOPPING_ENTRY_NOTES = "notes"
+        const val SHOPPING_ENTRY_MEASURE = "measure"
+        const val SHOPPING_ENTRY_QUANTITY = "quantity"
+        const val SHOPPING_ENTRY_COLOR = "color"
     }
 }

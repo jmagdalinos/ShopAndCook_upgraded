@@ -15,8 +15,9 @@ abstract class ShoppingDatabase : RoomDatabase() {
         private const val DATABASE_NAME: String = "shopping"
 
         fun newInstance(context: Context) : ShoppingDatabase {
-            return Room.databaseBuilder(context.applicationContext, ShoppingDatabase::class
-                    .java, DATABASE_NAME).build()
+            return Room.databaseBuilder(context.applicationContext,
+                    ShoppingDatabase::class.java,
+                    DATABASE_NAME).build()
         }
     }
 }

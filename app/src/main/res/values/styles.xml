@@ -180,6 +180,11 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="dialog_delete_animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_delete_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_delete_exit_anim</item>
+    </style>
+
     <!-- Widgets -->
     <style name="day_widget_meal_titles">
         <item name="android:layout_gravity">center_vertical</item>

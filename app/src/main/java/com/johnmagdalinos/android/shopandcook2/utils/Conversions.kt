@@ -12,24 +12,31 @@ class Conversions {
         }
 
         /** Returns the measure based on the measure given in int */
-        fun convertIntToMeasure(context: Context, measure: Int?, quantity: Double?) : String? {
-            if (measure == null) return null
+        fun convertIntToMeasure(context: Context, measure: Int? = 0, quantity: Float? = 0.0f):
+                String {
 
-            val measuresSingular: Array<String> = context.resources.getStringArray(R.array
-                    .measure_spinner_singular)
-            val measuresPlural: Array<String> = context.resources.getStringArray(R.array.measure_spinner_plural)
+            val finalMeasure: Int = measure ?: 0
+            val finalQuantity: Int = quantity?.toInt() ?: 0
 
-            // Check if the measure should be returned in singular or plural form
-            return if (quantity != null && quantity > 1) {
-                measuresPlural[measure]
-            } else {
-                measuresSingular[measure]
+            return when(finalMeasure) {
+                1 -> context.resources.getQuantityString(R.plurals.measure_1, finalQuantity)
+                2 -> context.resources.getQuantityString(R.plurals.measure_2, finalQuantity)
+                3 -> context.resources.getQuantityString(R.plurals.measure_3, finalQuantity)
+                4 -> context.resources.getQuantityString(R.plurals.measure_4, finalQuantity)
+                5 -> context.resources.getQuantityString(R.plurals.measure_5, finalQuantity)
+                6 -> context.resources.getQuantityString(R.plurals.measure_6, finalQuantity)
+                7 -> context.resources.getQuantityString(R.plurals.measure_7, finalQuantity)
+                8 -> context.resources.getQuantityString(R.plurals.measure_8, finalQuantity)
+                9 -> context.resources.getQuantityString(R.plurals.measure_9, finalQuantity)
+                10 -> context.resources.getQuantityString(R.plurals.measure_10, finalQuantity)
+                11 -> context.resources.getQuantityString(R.plurals.measure_11, finalQuantity)
+                12 -> context.resources.getQuantityString(R.plurals.measure_12, finalQuantity)
+                else -> context.resources.getQuantityString(R.plurals.measure_0, finalQuantity)
             }
-
         }
 
         /** Returns the quantity in String format eliminating all unnecessary decimals  */
-        fun convertQuantityToString(quantity: Double?) : String {
+        fun convertQuantityToString(quantity: Float?) : String {
             if (quantity == null) return "0"
             // Round the quantity to 2 decimals
             val quantityRounded = Math.round(quantity * 100) / 100.0
