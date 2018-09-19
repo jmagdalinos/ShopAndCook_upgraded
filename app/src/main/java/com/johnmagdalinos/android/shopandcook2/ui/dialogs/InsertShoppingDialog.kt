@@ -16,6 +16,7 @@ import android.widget.Toast
 import com.johnmagdalinos.android.shopandcook2.R
 import com.johnmagdalinos.android.shopandcook2.ui.adapters.ColorAdapter
 import com.johnmagdalinos.android.shopandcook2.utils.Constants.Companion.INSERT_DIALOG_CODE
+import com.johnmagdalinos.android.shopandcook2.utils.Constants.Companion.INSERT_SHOPPING_DIALOG_CURRENT_COLOR
 import com.johnmagdalinos.android.shopandcook2.utils.Constants.Companion.SHOPPING_ENTRY_COLOR
 import com.johnmagdalinos.android.shopandcook2.utils.Constants.Companion.SHOPPING_ENTRY_MEASURE
 import com.johnmagdalinos.android.shopandcook2.utils.Constants.Companion.SHOPPING_ENTRY_NAME
@@ -55,7 +56,7 @@ class InsertShoppingDialog: DialogFragment() {
 
         val position: Int = arguments!!.getInt(SHOPPING_ENTRY_POSITION)
         if (savedInstanceState != null) {
-            color = savedInstanceState.getInt("test")
+            color = savedInstanceState.getInt(INSERT_SHOPPING_DIALOG_CURRENT_COLOR)
         } else {
             color = arguments!!.getInt(SHOPPING_ENTRY_COLOR)
         }
@@ -140,7 +141,7 @@ class InsertShoppingDialog: DialogFragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt("test", color)
+        outState.putInt(INSERT_SHOPPING_DIALOG_CURRENT_COLOR, color)
         super.onSaveInstanceState(outState)
     }
 }

@@ -17,6 +17,7 @@ class Constants {
         const val DETAIL_ACTIVITY_CURRENT_FRAGMENT: String = "detail_activity_current_fragment"
         const val MAIN_FRAGMENT_RECYCLER_STATE = "main_recycler_state"
         const val SHOPPING_LIST_FRAGMENT_RECYCLER_STATE = "shopping_list_recycler_state"
+        const val INSERT_SHOPPING_DIALOG_CURRENT_COLOR = "insert_shopping_dialog_color"
         const val RECIPE_LIST_FRAGMENT_RECYCLER_STATE = "recipe_list_recycler_state"
 
         // Shared Preferences
